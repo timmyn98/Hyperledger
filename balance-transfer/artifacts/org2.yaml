@@ -41,6 +41,9 @@ client:
     # if using an alternative impl. For instance, CouchDBKeyValueStore.js would require an object
     # here for properties like url, db name, etc.
     path: "./fabric-client-kv-org2"
+    url: "mongodb://localhost:27017"
+    dbname: "org2"
+    collectionName: "crypto"
 
     # [Optional]. Specific to the CryptoSuite implementation. Software-based implementations like
     # CryptoSuite_ECDSA_AES.js in node SDK requires a key store. PKCS#11 based implementations does
@@ -48,6 +51,9 @@ client:
     cryptoStore:
       # Specific to the underlying KeyValueStore that backs the crypto key store.
       path: "/tmp/fabric-client-kv-org2"
+      url: "mongodb://localhost:27017"
+      dbname: "org1"
+      collectionName: "crypto"
 
     # [Optional]. Specific to Composer environment
     wallet: wallet-name

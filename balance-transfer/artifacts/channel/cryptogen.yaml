@@ -17,7 +17,8 @@ OrdererOrgs:
     # "Specs" - See PeerOrgs below for complete description
     # ---------------------------------------------------------------------------
     Specs:
-      - Hostname: orderer
+      - Hostname: orderer0
+      - Hostname: orderer1
 
 # ---------------------------------------------------------------------------
 # "PeerOrgs" - Definition of organizations managing peer nodes
@@ -83,7 +84,7 @@ PeerOrgs:
     # name collisions
     # ---------------------------------------------------------------------------
     Template:
-      Count: 2
+      Count: 3
       # Start: 5
       # Hostname: {{.Prefix}}{{.Index}} # default
       SANS:
@@ -106,7 +107,7 @@ PeerOrgs:
        Hostname: ca # implicitly ca.org1.example.com
 
     Template:
-      Count: 2
+      Count: 3
       SANS:
         - "localhost"
     Users:

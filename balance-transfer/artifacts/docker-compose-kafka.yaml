@@ -5,6 +5,10 @@
 
 version: '2'
 
+networks:
+  fabric_net:
+    external: true
+
 services:
 
   zookeeper0:
@@ -97,10 +101,9 @@ services:
       #
       # zookeeper.session.timeout.ms
       #- KAFKA_ZOOKEEPER_SESSION_TIMEOUT_MS = 6000
-    depends_on:
-      - zookeeper0
-      - zookeeper1
-      - zookeeper2
+      - KAFKA_LOG.DIRS=/tmp/kafka-logs
+    volumes: 
+      - ../../../hyperledger_backup/kafka0/kafka-logs/:/tmp/kafka-logs
 
   kafka1:
     extends:
@@ -111,10 +114,9 @@ services:
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
-    depends_on:
-      - zookeeper0
-      - zookeeper1
-      - zookeeper2
+      - KAFKA_LOG.DIRS=/tmp/kafka-logs
+    volumes: 
+      - ../../../hyperledger_backup/kafka1/kafka-logs/:/tmp/kafka-logs
 
   kafka2:
     extends:
@@ -125,10 +127,9 @@ services:
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
-    depends_on:
-      - zookeeper0
-      - zookeeper1
-      - zookeeper2
+      - KAFKA_LOG.DIRS=/tmp/kafka-logs
+    volumes: 
+      - ../../../hyperledger_backup/kafka2/kafka-logs/:/tmp/kafka-logs
 
   kafka3:
     extends:
@@ -139,7 +140,6 @@ services:
       - KAFKA_DEFAULT_REPLICATION_FACTOR=3
       - KAFKA_MIN_INSYNC_REPLICAS=2
       - KAFKA_ZOOKEEPER_CONNECT=zookeeper0:2181,zookeeper1:2181,zookeeper2:2181
-    depends_on:
-      - zookeeper0
-      - zookeeper1
-      - zookeeper2
+      - KAFKA_LOG.DIRS=/tmp/kafka-logs
+    volumes: 
+      - ../../../hyperledger_backup/kafka3/kafka-logs/:/tmp/kafka-logs

@@ -4,6 +4,11 @@
 #
 
 version: '2'
+
+networks:
+  fabric_net:
+    external: true
+
 services:
   peer-base:
     image: hyperledger/fabric-peer:x86_64-1.1.0
@@ -12,7 +17,7 @@ services:
       # the following setting starts chaincode containers on the same
       # bridge network as the peers
       # https://docs.docker.com/compose/networking/
-      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=artifacts_default
+      - CORE_VM_DOCKER_HOSTCONFIG_NETWORKMODE=fabric_net
       - CORE_LOGGING_LEVEL=DEBUG
       - CORE_PEER_GOSSIP_USELEADERELECTION=true
       - CORE_PEER_GOSSIP_ORGLEADER=false
@@ -28,6 +33,9 @@ services:
     command: peer node start
     volumes:
         - /var/run/:/host/var/run/
+    networks:
+      - fabric_net
+
 
   zookeeper:
     image: hyperledger/fabric-zookeeper:x86_64-1.0.3
@@ -36,6 +44,9 @@ services:
       - '2181'
       - '2888'
       - '3888'
+    networks:
+      - fabric_net
+
 
   kafka:
     image: hyperledger/fabric-kafka:x86_64-1.0.3
@@ -79,3 +90,6 @@ services:
       # - KAFKA_LOG_RETENTION_MS=-1
     ports:
       - '9092'
+    networks:
+      - fabric_net
+

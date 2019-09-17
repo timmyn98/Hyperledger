@@ -38,6 +38,7 @@ async function getClientForOrg (userorg, username) {
 	logger.debug('getClientForOrg - ****** START %s %s', userorg, username)
 	// get a fabric client loaded with a connection profile for this org
 	let config = '-connection-profile-path';
+	hfc.setConfigSetting('key-value-store', 'fabric-sdk-kvs-mongo');
 
 	// build a client context and load it with a connection profile
 	// lets only load the network settings and save the client for later
