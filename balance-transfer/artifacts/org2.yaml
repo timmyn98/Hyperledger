@@ -43,7 +43,7 @@ client:
     path: "./fabric-client-kv-org2"
     url: "mongodb://localhost:27017"
     dbname: "org2"
-    collectionName: "crypto"
+    collectionName: "credential"
 
     # [Optional]. Specific to the CryptoSuite implementation. Software-based implementations like
     # CryptoSuite_ECDSA_AES.js in node SDK requires a key store. PKCS#11 based implementations does
